@@ -31,7 +31,7 @@ User|as|Any|break|case|catch|class|continue|default|defer|deinit|do|dynamicType|
 "{"[^}\n]*"}"     /* eat up one-line comments */
 
 [ \t\n]+          /* eat up whitespace */
-
+ dew 
 .           printf( "Unrecognized character: %s\n", yytext );
 
 %%
