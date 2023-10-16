@@ -5,7 +5,7 @@
 
 DIGIT    [0-9]
 ID       [a-zA-Z][a-zA-Z0-9]*
-STRING   ["][ a-zA-Z0-9]*["]
+STRING   ["'][ a-zA-Z0-9]*["']
 
 %%
 
@@ -21,16 +21,21 @@ User|as|Any|break|case|catch|class|continue|default|defer|deinit|do|dynamicType|
             printf( "A float: %s (%g)\n", yytext,
                     atof( yytext ) );
             }
-{STRING}    printf("A string");
+{STRING}   { printf("A string:%s\n",yytext);}
 
 
-{ID}        printf( "An identifier: %s\n", yytext );
+{ID}         {
+        printf( "An identifier: %s\n", yytext );}
 
 "="|"+="|"-="|"="|"/="|"%="|"<<="|">>="|"&="|"^="|"+"|"-"|"/"|"%"|"++"|"--"|"=="|"!="|">"|"<"|">="|"<="|"&&"|"!"|"?:"|"??"|"a...b"|"a..<b"|"&"|"^"|"<<"|">>"|"&+"|"&-"|"&*"|"?="|"as"|"as?"|"as!"|"is"|"..<"|"..."|"="|"&"|"==="|"!=="  printf( "An operator: %s\n", yytext );
 
-"{"[^}\n]*"}"     /* eat up one-line comments */
+\/\/.*                          { printf("Comment(\"%s\")\n", yytext); /* Comments */ }
+\/\*[^\*\/]*\*\/                { printf("Comment(\"%s\")\n", yytext); }
 
-[ \t\n]+          /* eat up whitespace */
+    
+\n                              { printf("Newline\n"); }
+
+[ \t]+          
 
 .           printf( "Unrecognized character: %s\n", yytext );
 
