@@ -9,8 +9,8 @@ extern FILE *yyin;
 
 %start program
 %token IMPORT_KEY STRUCT_KEY VAR_KEY LET_KEY RETURN ELSE USER_DEFINED_FUNCTION_DECLARATION IF BREAK CONTINUE INTEGER_TYPE FLOAT_TYPE DOUBLE_TYPE BOOLEAN_TYPE STRING_TYPE CHARACTER_TYPE VOID_TYPE ARRAY_TYPE DICTIONARY_TYPE LT_CURL_BRACE RT_CURL_BRACE COL_OP 
-%token STRING_LITERAL CASE CHARACTER_LITERALS IDENTIFIER LT_RND_BRACES
-%token SINGLE_LINE_COMMENT MULTI_LINE_COMMENT EQUAL RT_RND_BRACES
+%token STRING_LITERAL CASE CHARACTER_LITERAL IDENTIFIER LT_RND_BRACES
+%token SINGLE_LINE_COMMENT MULTI_LINE_COMMENT EQUAL RT_RND_BRACES INT_LITERAL
 %token EQUALEQUAL NOEQUAL GREATEREQUAL LESSEQUAL GREATER LESSER MODULOEQUAL MINUSEQUAL WHILE_KEY
 %token PLUSEQUAL MULTIEQUAL DIVEQUAL DIVISION MODULO PLUS MINUS MULTIPLY NOT_OPERATOR AND_OPERATOR OR_OPERATOR IN_KEY
 %token XOR_OPERATOR LEFT_SHIFT_EQUAL RIGHT_SHIFT_EQUAL SWITCH DEFAULT FOR_KEY
@@ -25,7 +25,7 @@ headers: imports headers
 | empty
 ;
 
-imports: IMPORT_KEY STRING_LITERAL
+imports: IMPORT_KEY IDENTIFIER
 ;
 
 declaration_list: declaration_list declaration 
@@ -33,6 +33,8 @@ declaration_list: declaration_list declaration
 ;
 
 declaration : variable_declaration 
+| assignment
+| statements
 | function_declaration | struct_declaration | comment;
 
 struct_declaration : STRUCT_KEY IDENTIFIER structblock;
@@ -65,7 +67,9 @@ forloops: FOR_KEY IDENTIFIER IN_KEY identifier block
 
 whileloops: WHILE_KEY condition block
 
-function_call: IDENTIFIER LT_RND_BRACES RT_RND_BRACES
+function_call: IDENTIFIER LT_RND_BRACES params RT_RND_BRACES
+
+params: identifier
 
 break : BREAK;
 
@@ -82,7 +86,7 @@ identifier : IDENTIFIER | literals | empty;
 
 conditional:if_statement|switchstatement;
 
-if_statement : IF condition block | if_statement if_statement | if_statement ELSE block;
+if_statement : IF LT_RND_BRACES condition RT_RND_BRACES block | if_statement if_statement | if_statement ELSE block;
 
 condition : expression;
 
@@ -104,7 +108,7 @@ case: CASE literals COL_OP statements
 | DEFAULT COL_OP statements
 ;
 
-literals : STRING_LITERAL | CHARACTER_LITERALS;
+literals : STRING_LITERAL | CHARACTER_LITERAL | INT_LITERAL;
 
 empty: ;
 %%

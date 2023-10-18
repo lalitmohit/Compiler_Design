@@ -11,13 +11,9 @@
 "var"       { printf("%s\n", yytext); return VAR_KEY; }
 "let"       { printf("%s\n", yytext); return LET_KEY; }
 "return"    { printf("%s\n", yytext); return RETURN; }
-"else"      { printf("%s\n", yytext); return ELSE; }
-"false"     { printf("%s\n", yytext); return FALSE; }
-"true"      { printf("%s\n", yytext); return TRUE; }
-"range"     { printf("%s\n", yytext); return RANGE; }
 "func"       { printf("%s\n", yytext); return USER_DEFINED_FUNCTION_DECLARATION; }
-"class"     { printf("%s\n", yytext); return USER_DEFINED_CLASS_DECLARATION; }
 "if"        { printf("%s\n", yytext); return IF; }
+"else"        { printf("%s\n", yytext); return ELSE; }
 "switch"     { printf("%s\n", yytext); return SWITCH; }
 "case"         {printf("%s\n", yytext); return CASE; }
 "default"       { printf("%s\n",yytext); return DEFAULT; }
@@ -25,36 +21,10 @@
 "while"     { printf("%s\n", yytext); return WHILE_KEY; }
 "break"     { printf("%s\n", yytext); return BREAK; }
 "continue"  { printf("%s\n", yytext); return CONTINUE; }
-"None"      { printf("%s\n", yytext); return NONE; }
-"as"        { printf("%s\n", yytext); return AS; }
-"is"        { printf("%s\n", yytext); return IS; }
-"not"       { printf("%s\n", yytext); return NOT; }
-"in"        { printf("%s\n", yytext); return IN; }
-"guard"   { printf("%s\n", yytext); return GUARD; }
-"try"     { printf("%s\n", yytext); return TRY; }
-"catch"   { printf("%s\n", yytext); return CATCH; }
-"throws"  { printf("%s\n", yytext); return THROWS; }
-"do"      { printf("%s\n", yytext); return DO; }
-"open"    { printf("%s\n", yytext); return OPEN; }
-"fileprivate" { printf("%s\n", yytext); return FILEPRIVATE; }
-"internal" { printf("%s\n", yytext); return INTERNAL; }
-"public"  { printf("%s\n", yytext); return PUBLIC; }
-"private" { printf("%s\n", yytext); return PRIVATE; }
-"public(set)" { printf("%s\n", yytext); return PUBLIC_SET; }
-"#if" { printf("%s\n", yytext); return PREPROCESSOR_IF; }
-"#elseif" { printf("%s\n", yytext); return PREPROCESSOR_ELSEIF; }
-"#else" { printf("%s\n", yytext); return PREPROCESSOR_ELSE; }
-"#endif" { printf("%s\n", yytext); return PREPROCESSOR_ENDIF; }
-"#warning" { printf("%s\n", yytext); return PREPROCESSOR_WARNING; }
-"#error" { printf("%s\n", yytext); return PREPROCESSOR_ERROR; }
-
-
-
 
 
 
 "Int"     { printf("%s\n", yytext); return INTEGER_TYPE; }
-"UInt"     { printf("%s\n", yytext); return UNSIGNED_INTEGER_TYPE; }
 "Float"   { printf("%s\n", yytext); return FLOAT_TYPE; }
 "Double"  { printf("%s\n", yytext); return DOUBLE_TYPE; }
 "Bool"    { printf("%s\n", yytext); return BOOLEAN_TYPE; }
@@ -64,22 +34,11 @@
 "Array"   { printf("%s\n", yytext); return ARRAY_TYPE; }
 "Dictionary" { printf("%s\n", yytext); return DICTIONARY_TYPE; }
 
-
-\"[^\\\"]*(\\.[^\\\"]*)*\" { printf("%s\n", yytext); return STRING_LITERAL; }
+[0-9]+                          { printf("%s\n",yytext); return INT_LITERAL; }
+\"([^\"]*)\"            { printf("%s\n", yytext); return STRING_LITERAL; }
 \'[^\\\']\'                { printf("%s\n", yytext); return CHARACTER_LITERAL; }
 
-
-
 [_a-zA-Z][_a-zA-Z0-9]* { printf("%s\n", yytext); return IDENTIFIER; }
-
-
-
-
-[0-9]+\.[0-9]+ { printf("%s\n", yytext); return FLOATING_NUMBER; }
-[0-9]+         { printf("%s\n", yytext); return INTEGER; }
-"0x"[0-9a-fA-F]+ { printf("%s\n", yytext); return HEX_INTEGER; }
-
-
 
 "<<="       { printf("%s\n", yytext); return LEFT_SHIFT_EQUAL; }
 ">>="       { printf("%s\n", yytext); return RIGHT_SHIFT_EQUAL; }
@@ -106,24 +65,16 @@
 "^"         { printf("%s\n", yytext); return XOR_OPERATOR; }
 "{"         { printf("%s\n", yytext); return LT_CURL_BRACE; }
 "}"         { printf("%s\n", yytext); return RT_CURL_BRACE; }
+"("         { printf("%s\n", yytext); return LT_RND_BRACES; }
+")"         { printf("%s\n", yytext); return RT_RND_BRACES; }
 ":"       { printf("%s\n", yytext); return COL_OP; }
-";"       { printf("%s\n", yytext); return SEM_COL_OP; }
-
-"@IBOutlet" { printf("%s\n", yytext); return IB_OUTLET; }
-"@IBAction" { printf("%s\n", yytext); return IB_ACTION; }
-"@escaping" { printf("%s\n", yytext); return ESCAPING; }
-"@autoclosure" { printf("%s\n", yytext); return AUTOCLOSURE; }
-"@discardableResult" { printf("%s\n", yytext); return DISCARDABLE_RESULT; }
-"@autoclosure(escaping)" { printf("%s\n", yytext); return AUTOCLOSURE_ESCAPING; }
-"@autoclosure(@autoclosure(escaping))" { printf("%s\n", yytext); return AUTOCLOSURE_ESCAPING_NESTED; }
+";"       { printf("%s\n", yytext); return ';'; }
 
 
 "//".*     { printf("%s\n", yytext); return SINGLE_LINE_COMMENT; }
 "/\*"(.)*"\*/" { printf("%s\n", yytext); return MULTI_LINE_COMMENT; }
 
-\n            { printf("%s\n", yytext); return NEWLINE; }
-
-[ \t]+        { /* Ignore whitespace */ }
+[ \t\n]+        { /* Ignore whitespace */ }
 
 .             { printf("%s\n", yytext); } /* Return other characters as-is */
 
