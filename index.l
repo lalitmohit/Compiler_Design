@@ -1,9 +1,7 @@
+%option yylineno
 %{
-#include <stdio.h>
-#include "two.tab.h"
-extern int yylval;
-void yyparse();
-int cnt = 0;
+    #include<stdio.h>
+    #include "syntaxanalyser.tab.h"
 %}
 
 %%
@@ -20,6 +18,9 @@ int cnt = 0;
 "func"       { printf("%s\n", yytext); return USER_DEFINED_FUNCTION_DECLARATION; }
 "class"     { printf("%s\n", yytext); return USER_DEFINED_CLASS_DECLARATION; }
 "if"        { printf("%s\n", yytext); return IF; }
+"switch"     { printf("%s\n", yytext); return SWITCH; }
+"case"         {printf("%s\n", yytext); return CASE; }
+"default"       { printf("%s\n",yytext); return DEFAULT; }
 "for"       { printf("%s\n", yytext); return FOR; }
 "while"     { printf("%s\n", yytext); return WHILE; }
 "break"     { printf("%s\n", yytext); return BREAK; }
