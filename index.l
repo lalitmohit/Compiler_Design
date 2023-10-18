@@ -1,7 +1,7 @@
 %option yylineno
 %{
     #include<stdio.h>
-    #include "syntaxanalyser.tab.h"
+    #include "index.tab.h"
 %}
 
 %%
@@ -21,8 +21,8 @@
 "switch"     { printf("%s\n", yytext); return SWITCH; }
 "case"         {printf("%s\n", yytext); return CASE; }
 "default"       { printf("%s\n",yytext); return DEFAULT; }
-"for"       { printf("%s\n", yytext); return FOR; }
-"while"     { printf("%s\n", yytext); return WHILE; }
+"for"       { printf("%s\n", yytext); return FOR_KEY; }
+"while"     { printf("%s\n", yytext); return WHILE_KEY; }
 "break"     { printf("%s\n", yytext); return BREAK; }
 "continue"  { printf("%s\n", yytext); return CONTINUE; }
 "None"      { printf("%s\n", yytext); return NONE; }
@@ -71,35 +71,31 @@
 
 
 [_a-zA-Z][_a-zA-Z0-9]* { printf("%s\n", yytext); return IDENTIFIER; }
-\n            { printf("%s\n", yytext); return NEWLINE; }
-
-[ \t]+        { /* Ignore whitespace */ }
-
-.             { printf("%s\n", yytext); return *yytext; } /* Return other characters as-is */
 
 
 
-"//".*     { printf("%s\n", yytext); return SINGLE_LINE_COMMENT; }
-"/\*"(.)*"\*/" { printf("%s\n", yytext); return MULTI_LINE_COMMENT; }
+
 [0-9]+\.[0-9]+ { printf("%s\n", yytext); return FLOATING_NUMBER; }
 [0-9]+         { printf("%s\n", yytext); return INTEGER; }
 "0x"[0-9a-fA-F]+ { printf("%s\n", yytext); return HEX_INTEGER; }
 
 
 
-"="         { printf("%s\n", yytext); return EQUAL; }
+"<<="       { printf("%s\n", yytext); return LEFT_SHIFT_EQUAL; }
+">>="       { printf("%s\n", yytext); return RIGHT_SHIFT_EQUAL; }
 "=="        { printf("%s\n", yytext); return EQUALEQUAL; }
 "!="        { printf("%s\n", yytext); return NOEQUAL; }
 ">="        { printf("%s\n", yytext); return GREATEREQUAL; }
 "<="        { printf("%s\n", yytext); return LESSEQUAL; }
-">"         { printf("%s\n", yytext); return GREATER; }
-"<"         { printf("%s\n", yytext); return LESSER; }
 "%="        { printf("%s\n", yytext); return MODULOEQUAL; }
 "-="        { printf("%s\n", yytext); return MINUSEQUAL; }
 "+="        { printf("%s\n", yytext); return PLUSEQUAL; }
 "*="        { printf("%s\n", yytext); return MULTIEQUAL; }
 "/="        { printf("%s\n", yytext); return DIVEQUAL; }
 "/"         { printf("%s\n", yytext); return DIVISION; }
+">"         { printf("%s\n", yytext); return GREATER; }
+"<"         { printf("%s\n", yytext); return LESSER; }
+"="         { printf("%s\n", yytext); return EQUAL; }
 "%"         { printf("%s\n", yytext); return MODULO; }
 "+"         { printf("%s\n", yytext); return PLUS; }
 "-"         { printf("%s\n", yytext); return MINUS; }
@@ -108,8 +104,6 @@
 "&"         { printf("%s\n", yytext); return AND_OPERATOR; }
 "|"         { printf("%s\n", yytext); return OR_OPERATOR; }
 "^"         { printf("%s\n", yytext); return XOR_OPERATOR; }
-"<<="       { printf("%s\n", yytext); return LEFT_SHIFT_EQUAL; }
-">>="       { printf("%s\n", yytext); return RIGHT_SHIFT_EQUAL; }
 "{"         { printf("%s\n", yytext); return LT_CURL_BRACE; }
 "}"         { printf("%s\n", yytext); return RT_CURL_BRACE; }
 ":"       { printf("%s\n", yytext); return COL_OP; }
@@ -122,6 +116,16 @@
 "@discardableResult" { printf("%s\n", yytext); return DISCARDABLE_RESULT; }
 "@autoclosure(escaping)" { printf("%s\n", yytext); return AUTOCLOSURE_ESCAPING; }
 "@autoclosure(@autoclosure(escaping))" { printf("%s\n", yytext); return AUTOCLOSURE_ESCAPING_NESTED; }
+
+
+"//".*     { printf("%s\n", yytext); return SINGLE_LINE_COMMENT; }
+"/\*"(.)*"\*/" { printf("%s\n", yytext); return MULTI_LINE_COMMENT; }
+
+\n            { printf("%s\n", yytext); return NEWLINE; }
+
+[ \t]+        { /* Ignore whitespace */ }
+
+.             { printf("%s\n", yytext); } /* Return other characters as-is */
 
 %%
 
