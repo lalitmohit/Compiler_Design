@@ -8,12 +8,16 @@ int cnt = 0;
 
 %%
 
+"import"    { printf("%s\n", yytext); return IMPORT_KEY; }
+"struct"    { printf("%s\n", yytext); return STRUCT_KEY; }
+"var"       { printf("%s\n", yytext); return VAR_KEY; }
+"let"       { printf("%s\n", yytext); return LET_KEY; }
 "return"    { printf("%s\n", yytext); return RETURN; }
 "else"      { printf("%s\n", yytext); return ELSE; }
 "false"     { printf("%s\n", yytext); return FALSE; }
 "true"      { printf("%s\n", yytext); return TRUE; }
 "range"     { printf("%s\n", yytext); return RANGE; }
-"def"       { printf("%s\n", yytext); return USER_DEFINED_FUNCTION_DECLARATION; }
+"func"       { printf("%s\n", yytext); return USER_DEFINED_FUNCTION_DECLARATION; }
 "class"     { printf("%s\n", yytext); return USER_DEFINED_CLASS_DECLARATION; }
 "if"        { printf("%s\n", yytext); return IF; }
 "for"       { printf("%s\n", yytext); return FOR; }
@@ -49,6 +53,7 @@ int cnt = 0;
 
 
 "Int"     { printf("%s\n", yytext); return INTEGER_TYPE; }
+"UInt"     { printf("%s\n", yytext); return UNSIGNED_INTEGER_TYPE; }
 "Float"   { printf("%s\n", yytext); return FLOAT_TYPE; }
 "Double"  { printf("%s\n", yytext); return DOUBLE_TYPE; }
 "Bool"    { printf("%s\n", yytext); return BOOLEAN_TYPE; }
@@ -104,7 +109,10 @@ int cnt = 0;
 "^"         { printf("%s\n", yytext); return XOR_OPERATOR; }
 "<<="       { printf("%s\n", yytext); return LEFT_SHIFT_EQUAL; }
 ">>="       { printf("%s\n", yytext); return RIGHT_SHIFT_EQUAL; }
-
+"{"         { printf("%s\n", yytext); return LT_CURL_BRACE; }
+"}"         { printf("%s\n", yytext); return RT_CURL_BRACE; }
+":"       { printf("%s\n", yytext); return COL_OP; }
+";"       { printf("%s\n", yytext); return SEM_COL_OP; }
 
 "@IBOutlet" { printf("%s\n", yytext); return IB_OUTLET; }
 "@IBAction" { printf("%s\n", yytext); return IB_ACTION; }
