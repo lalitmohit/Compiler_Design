@@ -1,0 +1,10 @@
+
+import Foundation
+
+// Define a function to print a message
+func sayHello(){
+    print("Hello, World!")
+}
+
+// Call the function to print the message
+sayHello()

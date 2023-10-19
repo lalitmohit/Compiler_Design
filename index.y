@@ -49,7 +49,7 @@ keywords_type : VAR_KEY | LET_KEY;
 
 function_declaration : USER_DEFINED_FUNCTION_DECLARATION IDENTIFIER LT_RND_BRACES typecasting_params RT_RND_BRACES block;
 
-typecasting_params: IDENTIFIER COL_OP datatypes;
+typecasting_params: IDENTIFIER COL_OP datatypes | empty;
 
 datatypes : INTEGER_TYPE | FLOAT_TYPE | DOUBLE_TYPE | BOOLEAN_TYPE | STRING_TYPE | CHARACTER_TYPE | VOID_TYPE | ARRAY_TYPE | DICTIONARY_TYPE;
 
@@ -77,10 +77,10 @@ continue : CONTINUE;
 
 comment: SINGLE_LINE_COMMENT | MULTI_LINE_COMMENT;
 
-assignment : keywords_type IDENTIFIER EQUAL literals;
+assignment : keywords_type IDENTIFIER EQUAL literals| identifier EQUAL identifier PLUS identifier;
 
 
-return : RETURN identifier;
+return : RETURN identifier|empty;
 
 identifier : IDENTIFIER | literals | empty;
 
@@ -90,7 +90,7 @@ if_statement : IF LT_RND_BRACES condition RT_RND_BRACES block | if_statement if_
 
 condition : expression;
 
-expression: expression operator expression | LT_RND_BRACES expression RT_RND_BRACES | IDENTIFIER | literals | operator IDENTIFIER ;
+expression: expression operator expression | LT_RND_BRACES expression RT_RND_BRACES | IDENTIFIER | literals | operator IDENTIFIER| keywords_type identifier ;
 
 operator : EQUAL | EQUALEQUAL | NOEQUAL | GREATEREQUAL | LESSEQUAL | GREATER | LESSER | MODULOEQUAL | MINUSEQUAL | PLUSEQUAL | MULTIEQUAL | DIVEQUAL | DIVISION | MODULO | PLUS | MINUS | MULTIPLY | NOT_OPERATOR | AND_OPERATOR | OR_OPERATOR | XOR_OPERATOR | LEFT_SHIFT_EQUAL | RIGHT_SHIFT_EQUAL
 
@@ -116,7 +116,7 @@ empty: ;
 void main() 
 { 
   FILE *fo;
-  fo=fopen("input.txt","r");
+  fo=fopen("input1.txt","r");
   yyin=fo;
   //printf("\nEnter:\n"); 
   yyparse(); 

@@ -1,0 +1,18 @@
+// Swift program to illustrate print statement 
+import Swift 
+
+// Declaring variables 
+var P = 4
+var V = 6
+var N=2
+var R=4
+var T=3
+
+if (P*V == N*R*T) 
+{ 
+	print("Equal") 
+} 
+else
+{ 
+	print("Not Equal") 
+}
