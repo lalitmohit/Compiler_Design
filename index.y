@@ -43,9 +43,11 @@ structblock : LT_CURL_BRACE struct_memebers RT_CURL_BRACE;
 
 struct_memebers : keywords_declaration | function_declaration | struct_declaration;
 
-keywords_declaration : keywords_type IDENTIFIER;
+keywords_declaration : keywords_type IDENTIFIER typecasting;
 
 keywords_type : VAR_KEY | LET_KEY;
+
+typecasting : COL_OP datatypes | empty;
 
 function_declaration : USER_DEFINED_FUNCTION_DECLARATION IDENTIFIER LT_RND_BRACES typecasting_params RT_RND_BRACES block;
 
@@ -66,6 +68,7 @@ iterative: forloops | whileloops ;
 forloops: FOR_KEY IDENTIFIER IN_KEY identifier block
 
 whileloops: WHILE_KEY condition block
+
 
 function_call: IDENTIFIER LT_RND_BRACES params RT_RND_BRACES
 
@@ -116,7 +119,7 @@ empty: ;
 void main() 
 { 
   FILE *fo;
-  fo=fopen("input1.txt","r");
+  fo=fopen("input4.txt","r");
   yyin=fo;
   //printf("\nEnter:\n"); 
   yyparse(); 
