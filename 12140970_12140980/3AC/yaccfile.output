@@ -1,0 +1,2295 @@
+Terminals unused in grammar
+
+    putsk
+    incDec
+    't'
+
+
+Rules useless in parser due to conflicts
+
+   56 C: exp RELOP exp
+
+
+State 21 conflicts: 13 reduce/reduce
+State 26 conflicts: 2 shift/reduce
+State 27 conflicts: 2 shift/reduce
+State 37 conflicts: 2 shift/reduce
+State 59 conflicts: 2 shift/reduce
+State 70 conflicts: 8 shift/reduce
+State 71 conflicts: 8 shift/reduce
+State 73 conflicts: 12 shift/reduce
+State 80 conflicts: 2 shift/reduce
+State 81 conflicts: 2 shift/reduce
+State 82 conflicts: 2 shift/reduce
+State 83 conflicts: 2 shift/reduce
+State 84 conflicts: 2 shift/reduce
+State 85 conflicts: 2 shift/reduce
+State 86 conflicts: 2 shift/reduce
+State 89 conflicts: 12 shift/reduce, 2 reduce/reduce
+State 90 conflicts: 2 reduce/reduce
+
+
+Grammar
+
+    0 $accept: line $end
+
+    1 line: assignment
+    2     | line assignment
+    3     | line identifier
+    4     | line exp
+
+    5 $@1: %empty
+
+    6 $@2: %empty
+
+    7 $@3: %empty
+
+    8 $@4: %empty
+
+    9 $@5: %empty
+
+   10 $@6: %empty
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+   12 $@7: %empty
+
+   13 $@8: %empty
+
+   14 $@9: %empty
+
+   15 $@10: %empty
+
+   16 $@11: %empty
+
+   17 $@12: %empty
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+   19 $@13: %empty
+
+   20 $@14: %empty
+
+   21 $@15: %empty
+
+   22 line: line WHILE $@13 '(' C $@14 ')' line $@15 endk
+
+   23 $@16: %empty
+
+   24 $@17: %empty
+
+   25 $@18: %empty
+
+   26 line: WHILE $@16 '(' C $@17 ')' line $@18 endk
+
+   27 $@19: %empty
+
+   28 $@20: %empty
+
+   29 line: line IF '(' C $@19 ')' line $@20 endk
+
+   30 $@21: %empty
+
+   31 $@22: %empty
+
+   32 line: IF '(' C $@21 ')' line $@22 endk
+   33     | line ELSE line endk
+   34     | ELSE line endk
+
+   35 assignment: TYPE identifier '=' exp
+   36           | identifier '=' exp
+
+   37 exp: term
+   38    | exp RELOP exp
+   39    | '-' '-' exp
+   40    | '+' '+' exp
+   41    | exp '-' '-'
+   42    | exp '+' '+'
+   43    | exp '+' term
+   44    | exp '-' term
+   45    | exp '*' term
+   46    | exp "**" term
+   47    | exp '/' term
+   48    | exp '%' term
+   49    | exp '&' term
+   50    | exp '|' term
+   51    | exp '^' term
+   52    | exp "<<" term
+   53    | exp ">>" term
+
+   54 C: exp AND exp
+   55  | exp AND C
+   56  | exp RELOP exp
+   57  | exp
+   58  | NOT exp
+
+   59 term: factor
+   60     | term '*' factor
+   61     | term '/' factor
+
+   62 factor: number
+   63       | '(' exp ')'
+   64       | identifier
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '%' (37) 48
+    '&' (38) 49
+    '(' (40) 11 18 22 26 29 32 63
+    ')' (41) 11 18 22 26 29 32 63
+    '*' (42) 45 60
+    '+' (43) 40 42 43
+    '-' (45) 39 41 44
+    '/' (47) 47 61
+    ';' (59) 11 18
+    '=' (61) 35 36
+    '^' (94) 51
+    't' (116)
+    '{' (123) 11 18
+    '|' (124) 50
+    '}' (125) 11 18
+    error (256)
+    putsk (258)
+    endk (259) 11 18 22 26 29 32 33 34
+    number <tuple> (260) 62
+    TYPE (261) 35
+    IF (262) 29 32
+    ELSE (263) 33 34
+    incDec <tuple> (264)
+    FOR <tuple> (265) 11 18
+    WHILE <tuple> (266) 22 26
+    identifier <tuple> (267) 3 35 36 64
+    RELOP <tuple> (268) 38 56
+    AND <tuple> (269) 54 55
+    NOT <tuple> (270) 58
+    "**" (271) 46
+    "<<" (272) 52
+    ">>" (273) 53
+
+
+Nonterminals, with rules where they appear
+
+    $accept (34)
+        on left: 0
+    line <tuple> (35)
+        on left: 1 2 3 4 11 18 22 26 29 32 33 34
+        on right: 0 2 3 4 11 18 22 26 29 32 33 34
+    $@1 (36)
+        on left: 5
+        on right: 11
+    $@2 (37)
+        on left: 6
+        on right: 11
+    $@3 (38)
+        on left: 7
+        on right: 11
+    $@4 (39)
+        on left: 8
+        on right: 11
+    $@5 (40)
+        on left: 9
+        on right: 11
+    $@6 (41)
+        on left: 10
+        on right: 11
+    $@7 (42)
+        on left: 12
+        on right: 18
+    $@8 (43)
+        on left: 13
+        on right: 18
+    $@9 (44)
+        on left: 14
+        on right: 18
+    $@10 (45)
+        on left: 15
+        on right: 18
+    $@11 (46)
+        on left: 16
+        on right: 18
+    $@12 (47)
+        on left: 17
+        on right: 18
+    $@13 (48)
+        on left: 19
+        on right: 22
+    $@14 (49)
+        on left: 20
+        on right: 22
+    $@15 (50)
+        on left: 21
+        on right: 22
+    $@16 (51)
+        on left: 23
+        on right: 26
+    $@17 (52)
+        on left: 24
+        on right: 26
+    $@18 (53)
+        on left: 25
+        on right: 26
+    $@19 (54)
+        on left: 27
+        on right: 29
+    $@20 (55)
+        on left: 28
+        on right: 29
+    $@21 (56)
+        on left: 30
+        on right: 32
+    $@22 (57)
+        on left: 31
+        on right: 32
+    assignment <tuple> (58)
+        on left: 35 36
+        on right: 1 2 11 18
+    exp <tuple> (59)
+        on left: 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53
+        on right: 4 11 18 35 36 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 63
+    C <tuple> (60)
+        on left: 54 55 56 57 58
+        on right: 11 18 22 26 29 32 55
+    term <tuple> (61)
+        on left: 59 60 61
+        on right: 37 43 44 45 46 47 48 49 50 51 52 53 60 61
+    factor <tuple> (62)
+        on left: 62 63 64
+        on right: 59 60 61
+
+
+State 0
+
+    0 $accept: . line $end
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 7
+    assignment  go to state 8
+
+
+State 1
+
+   35 assignment: TYPE . identifier '=' exp
+
+    identifier  shift, and go to state 9
+
+
+State 2
+
+   32 line: IF . '(' C $@21 ')' line $@22 endk
+
+    '('  shift, and go to state 10
+
+
+State 3
+
+   34 line: ELSE . line endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 11
+    assignment  go to state 8
+
+
+State 4
+
+   18 line: FOR . '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    '('  shift, and go to state 12
+
+
+State 5
+
+   26 line: WHILE . $@16 '(' C $@17 ')' line $@18 endk
+
+    $default  reduce using rule 23 ($@16)
+
+    $@16  go to state 13
+
+
+State 6
+
+   36 assignment: identifier . '=' exp
+
+    '='  shift, and go to state 14
+
+
+State 7
+
+    0 $accept: line . $end
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+
+    $end        shift, and go to state 15
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 8
+
+    1 line: assignment .
+
+    $default  reduce using rule 1 (line)
+
+
+State 9
+
+   35 assignment: TYPE identifier . '=' exp
+
+    '='  shift, and go to state 29
+
+
+State 10
+
+   32 line: IF '(' . C $@21 ')' line $@22 endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 32
+    C       go to state 33
+    term    go to state 27
+    factor  go to state 28
+
+
+State 11
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+   34     | ELSE line . endk
+
+    endk        shift, and go to state 34
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 12
+
+   18 line: FOR '(' . assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    TYPE        shift, and go to state 1
+    identifier  shift, and go to state 6
+
+    assignment  go to state 35
+
+
+State 13
+
+   26 line: WHILE $@16 . '(' C $@17 ')' line $@18 endk
+
+    '('  shift, and go to state 36
+
+
+State 14
+
+   36 assignment: identifier '=' . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 37
+    term    go to state 27
+    factor  go to state 28
+
+
+State 15
+
+    0 $accept: line $end .
+
+    $default  accept
+
+
+State 16
+
+   62 factor: number .
+
+    $default  reduce using rule 62 (factor)
+
+
+State 17
+
+   29 line: line IF . '(' C $@19 ')' line $@20 endk
+
+    '('  shift, and go to state 38
+
+
+State 18
+
+   33 line: line ELSE . line endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 39
+    assignment  go to state 8
+
+
+State 19
+
+   11 line: line FOR . '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    '('  shift, and go to state 40
+
+
+State 20
+
+   22 line: line WHILE . $@13 '(' C $@14 ')' line $@15 endk
+
+    $default  reduce using rule 19 ($@13)
+
+    $@13  go to state 41
+
+
+State 21
+
+    3 line: line identifier .
+   36 assignment: identifier . '=' exp
+   64 factor: identifier .
+
+    '='  shift, and go to state 14
+
+    $end        reduce using rule 3 (line)
+    $end        [reduce using rule 64 (factor)]
+    endk        reduce using rule 3 (line)
+    endk        [reduce using rule 64 (factor)]
+    number      reduce using rule 3 (line)
+    number      [reduce using rule 64 (factor)]
+    TYPE        reduce using rule 3 (line)
+    TYPE        [reduce using rule 64 (factor)]
+    IF          reduce using rule 3 (line)
+    IF          [reduce using rule 64 (factor)]
+    ELSE        reduce using rule 3 (line)
+    ELSE        [reduce using rule 64 (factor)]
+    FOR         reduce using rule 3 (line)
+    FOR         [reduce using rule 64 (factor)]
+    WHILE       reduce using rule 3 (line)
+    WHILE       [reduce using rule 64 (factor)]
+    identifier  reduce using rule 3 (line)
+    identifier  [reduce using rule 64 (factor)]
+    RELOP       reduce using rule 64 (factor)
+    '*'         reduce using rule 64 (factor)
+    '/'         reduce using rule 64 (factor)
+    '+'         reduce using rule 3 (line)
+    '+'         [reduce using rule 64 (factor)]
+    '-'         reduce using rule 3 (line)
+    '-'         [reduce using rule 64 (factor)]
+    '('         reduce using rule 3 (line)
+    '('         [reduce using rule 64 (factor)]
+    '}'         reduce using rule 3 (line)
+    '}'         [reduce using rule 64 (factor)]
+    "**"        reduce using rule 64 (factor)
+    '%'         reduce using rule 64 (factor)
+    '&'         reduce using rule 64 (factor)
+    '|'         reduce using rule 64 (factor)
+    '^'         reduce using rule 64 (factor)
+    "<<"        reduce using rule 64 (factor)
+    ">>"        reduce using rule 64 (factor)
+    $default    reduce using rule 3 (line)
+
+
+State 22
+
+   40 exp: '+' . '+' exp
+
+    '+'  shift, and go to state 42
+
+
+State 23
+
+   39 exp: '-' . '-' exp
+
+    '-'  shift, and go to state 43
+
+
+State 24
+
+   63 factor: '(' . exp ')'
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 44
+    term    go to state 27
+    factor  go to state 28
+
+
+State 25
+
+    2 line: line assignment .
+
+    $default  reduce using rule 2 (line)
+
+
+State 26
+
+    4 line: line exp .
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    '+'       [reduce using rule 4 (line)]
+    '-'       [reduce using rule 4 (line)]
+    $default  reduce using rule 4 (line)
+
+
+State 27
+
+   37 exp: term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 37 (exp)]
+    '/'       [reduce using rule 37 (exp)]
+    $default  reduce using rule 37 (exp)
+
+
+State 28
+
+   59 term: factor .
+
+    $default  reduce using rule 59 (term)
+
+
+State 29
+
+   35 assignment: TYPE identifier '=' . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 59
+    term    go to state 27
+    factor  go to state 28
+
+
+State 30
+
+   64 factor: identifier .
+
+    $default  reduce using rule 64 (factor)
+
+
+State 31
+
+   58 C: NOT . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 60
+    term    go to state 27
+    factor  go to state 28
+
+
+State 32
+
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+   54 C: exp . AND exp
+   55  | exp . AND C
+   56  | exp . RELOP exp
+   57  | exp .
+
+    RELOP  shift, and go to state 61
+    AND    shift, and go to state 62
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    $default  reduce using rule 57 (C)
+
+
+State 33
+
+   32 line: IF '(' C . $@21 ')' line $@22 endk
+
+    $default  reduce using rule 30 ($@21)
+
+    $@21  go to state 63
+
+
+State 34
+
+   34 line: ELSE line endk .
+
+    $default  reduce using rule 34 (line)
+
+
+State 35
+
+   18 line: FOR '(' assignment . $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    $default  reduce using rule 12 ($@7)
+
+    $@7  go to state 64
+
+
+State 36
+
+   26 line: WHILE $@16 '(' . C $@17 ')' line $@18 endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 32
+    C       go to state 65
+    term    go to state 27
+    factor  go to state 28
+
+
+State 37
+
+   36 assignment: identifier '=' exp .
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    '+'       [reduce using rule 36 (assignment)]
+    '-'       [reduce using rule 36 (assignment)]
+    $default  reduce using rule 36 (assignment)
+
+
+State 38
+
+   29 line: line IF '(' . C $@19 ')' line $@20 endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 32
+    C       go to state 66
+    term    go to state 27
+    factor  go to state 28
+
+
+State 39
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+   33     | line ELSE line . endk
+
+    endk        shift, and go to state 67
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 40
+
+   11 line: line FOR '(' . assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    TYPE        shift, and go to state 1
+    identifier  shift, and go to state 6
+
+    assignment  go to state 68
+
+
+State 41
+
+   22 line: line WHILE $@13 . '(' C $@14 ')' line $@15 endk
+
+    '('  shift, and go to state 69
+
+
+State 42
+
+   40 exp: '+' '+' . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 70
+    term    go to state 27
+    factor  go to state 28
+
+
+State 43
+
+   39 exp: '-' '-' . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 71
+    term    go to state 27
+    factor  go to state 28
+
+
+State 44
+
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+   63 factor: '(' exp . ')'
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    ')'    shift, and go to state 72
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+
+State 45
+
+   38 exp: exp RELOP . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 73
+    term    go to state 27
+    factor  go to state 28
+
+
+State 46
+
+   45 exp: exp '*' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 74
+    factor  go to state 28
+
+
+State 47
+
+   47 exp: exp '/' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 75
+    factor  go to state 28
+
+
+State 48
+
+   42 exp: exp '+' . '+'
+   43    | exp '+' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 76
+    '('         shift, and go to state 24
+
+    term    go to state 77
+    factor  go to state 28
+
+
+State 49
+
+   41 exp: exp '-' . '-'
+   44    | exp '-' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '-'         shift, and go to state 78
+    '('         shift, and go to state 24
+
+    term    go to state 79
+    factor  go to state 28
+
+
+State 50
+
+   46 exp: exp "**" . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 80
+    factor  go to state 28
+
+
+State 51
+
+   48 exp: exp '%' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 81
+    factor  go to state 28
+
+
+State 52
+
+   49 exp: exp '&' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 82
+    factor  go to state 28
+
+
+State 53
+
+   50 exp: exp '|' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 83
+    factor  go to state 28
+
+
+State 54
+
+   51 exp: exp '^' . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 84
+    factor  go to state 28
+
+
+State 55
+
+   52 exp: exp "<<" . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 85
+    factor  go to state 28
+
+
+State 56
+
+   53 exp: exp ">>" . term
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    term    go to state 86
+    factor  go to state 28
+
+
+State 57
+
+   60 term: term '*' . factor
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    factor  go to state 87
+
+
+State 58
+
+   61 term: term '/' . factor
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '('         shift, and go to state 24
+
+    factor  go to state 88
+
+
+State 59
+
+   35 assignment: TYPE identifier '=' exp .
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    '+'       [reduce using rule 35 (assignment)]
+    '-'       [reduce using rule 35 (assignment)]
+    $default  reduce using rule 35 (assignment)
+
+
+State 60
+
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+   58 C: NOT exp .
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    $default  reduce using rule 58 (C)
+
+
+State 61
+
+   38 exp: exp RELOP . exp
+   56 C: exp RELOP . exp
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 89
+    term    go to state 27
+    factor  go to state 28
+
+
+State 62
+
+   54 C: exp AND . exp
+   55  | exp AND . C
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 90
+    C       go to state 91
+    term    go to state 27
+    factor  go to state 28
+
+
+State 63
+
+   32 line: IF '(' C $@21 . ')' line $@22 endk
+
+    ')'  shift, and go to state 92
+
+
+State 64
+
+   18 line: FOR '(' assignment $@7 . ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    ';'  shift, and go to state 93
+
+
+State 65
+
+   26 line: WHILE $@16 '(' C . $@17 ')' line $@18 endk
+
+    $default  reduce using rule 24 ($@17)
+
+    $@17  go to state 94
+
+
+State 66
+
+   29 line: line IF '(' C . $@19 ')' line $@20 endk
+
+    $default  reduce using rule 27 ($@19)
+
+    $@19  go to state 95
+
+
+State 67
+
+   33 line: line ELSE line endk .
+
+    $default  reduce using rule 33 (line)
+
+
+State 68
+
+   11 line: line FOR '(' assignment . $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    $default  reduce using rule 5 ($@1)
+
+    $@1  go to state 96
+
+
+State 69
+
+   22 line: line WHILE $@13 '(' . C $@14 ')' line $@15 endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 32
+    C       go to state 97
+    term    go to state 27
+    factor  go to state 28
+
+
+State 70
+
+   38 exp: exp . RELOP exp
+   40    | '+' '+' exp .
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    RELOP     [reduce using rule 40 (exp)]
+    "**"      [reduce using rule 40 (exp)]
+    '%'       [reduce using rule 40 (exp)]
+    '&'       [reduce using rule 40 (exp)]
+    '|'       [reduce using rule 40 (exp)]
+    '^'       [reduce using rule 40 (exp)]
+    "<<"      [reduce using rule 40 (exp)]
+    ">>"      [reduce using rule 40 (exp)]
+    $default  reduce using rule 40 (exp)
+
+
+State 71
+
+   38 exp: exp . RELOP exp
+   39    | '-' '-' exp .
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    RELOP     [reduce using rule 39 (exp)]
+    "**"      [reduce using rule 39 (exp)]
+    '%'       [reduce using rule 39 (exp)]
+    '&'       [reduce using rule 39 (exp)]
+    '|'       [reduce using rule 39 (exp)]
+    '^'       [reduce using rule 39 (exp)]
+    "<<"      [reduce using rule 39 (exp)]
+    ">>"      [reduce using rule 39 (exp)]
+    $default  reduce using rule 39 (exp)
+
+
+State 72
+
+   63 factor: '(' exp ')' .
+
+    $default  reduce using rule 63 (factor)
+
+
+State 73
+
+   38 exp: exp . RELOP exp
+   38    | exp RELOP exp .
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    RELOP     [reduce using rule 38 (exp)]
+    '*'       [reduce using rule 38 (exp)]
+    '/'       [reduce using rule 38 (exp)]
+    '+'       [reduce using rule 38 (exp)]
+    '-'       [reduce using rule 38 (exp)]
+    "**"      [reduce using rule 38 (exp)]
+    '%'       [reduce using rule 38 (exp)]
+    '&'       [reduce using rule 38 (exp)]
+    '|'       [reduce using rule 38 (exp)]
+    '^'       [reduce using rule 38 (exp)]
+    "<<"      [reduce using rule 38 (exp)]
+    ">>"      [reduce using rule 38 (exp)]
+    $default  reduce using rule 38 (exp)
+
+
+State 74
+
+   45 exp: exp '*' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    $default  reduce using rule 45 (exp)
+
+
+State 75
+
+   47 exp: exp '/' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    $default  reduce using rule 47 (exp)
+
+
+State 76
+
+   42 exp: exp '+' '+' .
+
+    $default  reduce using rule 42 (exp)
+
+
+State 77
+
+   43 exp: exp '+' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    $default  reduce using rule 43 (exp)
+
+
+State 78
+
+   41 exp: exp '-' '-' .
+
+    $default  reduce using rule 41 (exp)
+
+
+State 79
+
+   44 exp: exp '-' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    $default  reduce using rule 44 (exp)
+
+
+State 80
+
+   46 exp: exp "**" term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 46 (exp)]
+    '/'       [reduce using rule 46 (exp)]
+    $default  reduce using rule 46 (exp)
+
+
+State 81
+
+   48 exp: exp '%' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 48 (exp)]
+    '/'       [reduce using rule 48 (exp)]
+    $default  reduce using rule 48 (exp)
+
+
+State 82
+
+   49 exp: exp '&' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 49 (exp)]
+    '/'       [reduce using rule 49 (exp)]
+    $default  reduce using rule 49 (exp)
+
+
+State 83
+
+   50 exp: exp '|' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 50 (exp)]
+    '/'       [reduce using rule 50 (exp)]
+    $default  reduce using rule 50 (exp)
+
+
+State 84
+
+   51 exp: exp '^' term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 51 (exp)]
+    '/'       [reduce using rule 51 (exp)]
+    $default  reduce using rule 51 (exp)
+
+
+State 85
+
+   52 exp: exp "<<" term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 52 (exp)]
+    '/'       [reduce using rule 52 (exp)]
+    $default  reduce using rule 52 (exp)
+
+
+State 86
+
+   53 exp: exp ">>" term .
+   60 term: term . '*' factor
+   61     | term . '/' factor
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    '*'       [reduce using rule 53 (exp)]
+    '/'       [reduce using rule 53 (exp)]
+    $default  reduce using rule 53 (exp)
+
+
+State 87
+
+   60 term: term '*' factor .
+
+    $default  reduce using rule 60 (term)
+
+
+State 88
+
+   61 term: term '/' factor .
+
+    $default  reduce using rule 61 (term)
+
+
+State 89
+
+   38 exp: exp . RELOP exp
+   38    | exp RELOP exp .
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+   56 C: exp RELOP exp .
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    RELOP     [reduce using rule 38 (exp)]
+    '*'       [reduce using rule 38 (exp)]
+    '/'       [reduce using rule 38 (exp)]
+    '+'       [reduce using rule 38 (exp)]
+    '-'       [reduce using rule 38 (exp)]
+    ';'       reduce using rule 38 (exp)
+    ';'       [reduce using rule 56 (C)]
+    ')'       reduce using rule 38 (exp)
+    ')'       [reduce using rule 56 (C)]
+    "**"      [reduce using rule 38 (exp)]
+    '%'       [reduce using rule 38 (exp)]
+    '&'       [reduce using rule 38 (exp)]
+    '|'       [reduce using rule 38 (exp)]
+    '^'       [reduce using rule 38 (exp)]
+    "<<"      [reduce using rule 38 (exp)]
+    ">>"      [reduce using rule 38 (exp)]
+    $default  reduce using rule 38 (exp)
+
+
+State 90
+
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+   54 C: exp . AND exp
+   54  | exp AND exp .
+   55  | exp . AND C
+   56  | exp . RELOP exp
+   57  | exp .
+
+    RELOP  shift, and go to state 61
+    AND    shift, and go to state 62
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    ';'       reduce using rule 54 (C)
+    ';'       [reduce using rule 57 (C)]
+    ')'       reduce using rule 54 (C)
+    ')'       [reduce using rule 57 (C)]
+    $default  reduce using rule 54 (C)
+
+
+State 91
+
+   55 C: exp AND C .
+
+    $default  reduce using rule 55 (C)
+
+
+State 92
+
+   32 line: IF '(' C $@21 ')' . line $@22 endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 98
+    assignment  go to state 8
+
+
+State 93
+
+   18 line: FOR '(' assignment $@7 ';' . C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 32
+    C       go to state 99
+    term    go to state 27
+    factor  go to state 28
+
+
+State 94
+
+   26 line: WHILE $@16 '(' C $@17 . ')' line $@18 endk
+
+    ')'  shift, and go to state 100
+
+
+State 95
+
+   29 line: line IF '(' C $@19 . ')' line $@20 endk
+
+    ')'  shift, and go to state 101
+
+
+State 96
+
+   11 line: line FOR '(' assignment $@1 . ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    ';'  shift, and go to state 102
+
+
+State 97
+
+   22 line: line WHILE $@13 '(' C . $@14 ')' line $@15 endk
+
+    $default  reduce using rule 20 ($@14)
+
+    $@14  go to state 103
+
+
+State 98
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   32     | IF '(' C $@21 ')' line . $@22 endk
+   33     | line . ELSE line endk
+
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    $default  reduce using rule 31 ($@22)
+
+    $@22        go to state 104
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 99
+
+   18 line: FOR '(' assignment $@7 ';' C . $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    $default  reduce using rule 13 ($@8)
+
+    $@8  go to state 105
+
+
+State 100
+
+   26 line: WHILE $@16 '(' C $@17 ')' . line $@18 endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 106
+    assignment  go to state 8
+
+
+State 101
+
+   29 line: line IF '(' C $@19 ')' . line $@20 endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 107
+    assignment  go to state 8
+
+
+State 102
+
+   11 line: line FOR '(' assignment $@1 ';' . C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    NOT         shift, and go to state 31
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 32
+    C       go to state 108
+    term    go to state 27
+    factor  go to state 28
+
+
+State 103
+
+   22 line: line WHILE $@13 '(' C $@14 . ')' line $@15 endk
+
+    ')'  shift, and go to state 109
+
+
+State 104
+
+   32 line: IF '(' C $@21 ')' line $@22 . endk
+
+    endk  shift, and go to state 110
+
+
+State 105
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 . ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    ';'  shift, and go to state 111
+
+
+State 106
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   26     | WHILE $@16 '(' C $@17 ')' line . $@18 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    $default  reduce using rule 25 ($@18)
+
+    $@18        go to state 112
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 107
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   29     | line IF '(' C $@19 ')' line . $@20 endk
+   33     | line . ELSE line endk
+
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    $default  reduce using rule 28 ($@20)
+
+    $@20        go to state 113
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 108
+
+   11 line: line FOR '(' assignment $@1 ';' C . $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    $default  reduce using rule 6 ($@2)
+
+    $@2  go to state 114
+
+
+State 109
+
+   22 line: line WHILE $@13 '(' C $@14 ')' . line $@15 endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 115
+    assignment  go to state 8
+
+
+State 110
+
+   32 line: IF '(' C $@21 ')' line $@22 endk .
+
+    $default  reduce using rule 32 (line)
+
+
+State 111
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' . $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    $default  reduce using rule 14 ($@9)
+
+    $@9  go to state 116
+
+
+State 112
+
+   26 line: WHILE $@16 '(' C $@17 ')' line $@18 . endk
+
+    endk  shift, and go to state 117
+
+
+State 113
+
+   29 line: line IF '(' C $@19 ')' line $@20 . endk
+
+    endk  shift, and go to state 118
+
+
+State 114
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 . ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    ';'  shift, and go to state 119
+
+
+State 115
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   22     | line WHILE $@13 '(' C $@14 ')' line . $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    $default  reduce using rule 21 ($@15)
+
+    $@15        go to state 120
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 116
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 . exp $@10 ')' '{' $@11 line $@12 '}' endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 121
+    term    go to state 27
+    factor  go to state 28
+
+
+State 117
+
+   26 line: WHILE $@16 '(' C $@17 ')' line $@18 endk .
+
+    $default  reduce using rule 26 (line)
+
+
+State 118
+
+   29 line: line IF '(' C $@19 ')' line $@20 endk .
+
+    $default  reduce using rule 29 (line)
+
+
+State 119
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' . $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    $default  reduce using rule 7 ($@3)
+
+    $@3  go to state 122
+
+
+State 120
+
+   22 line: line WHILE $@13 '(' C $@14 ')' line $@15 . endk
+
+    endk  shift, and go to state 123
+
+
+State 121
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp . $@10 ')' '{' $@11 line $@12 '}' endk
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    $default  reduce using rule 15 ($@10)
+
+    $@10  go to state 124
+
+
+State 122
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 . exp $@4 ')' '{' $@5 line $@6 '}' endk
+
+    number      shift, and go to state 16
+    identifier  shift, and go to state 30
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    exp     go to state 125
+    term    go to state 27
+    factor  go to state 28
+
+
+State 123
+
+   22 line: line WHILE $@13 '(' C $@14 ')' line $@15 endk .
+
+    $default  reduce using rule 22 (line)
+
+
+State 124
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 . ')' '{' $@11 line $@12 '}' endk
+
+    ')'  shift, and go to state 126
+
+
+State 125
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp . $@4 ')' '{' $@5 line $@6 '}' endk
+   38 exp: exp . RELOP exp
+   41    | exp . '-' '-'
+   42    | exp . '+' '+'
+   43    | exp . '+' term
+   44    | exp . '-' term
+   45    | exp . '*' term
+   46    | exp . "**" term
+   47    | exp . '/' term
+   48    | exp . '%' term
+   49    | exp . '&' term
+   50    | exp . '|' term
+   51    | exp . '^' term
+   52    | exp . "<<" term
+   53    | exp . ">>" term
+
+    RELOP  shift, and go to state 45
+    '*'    shift, and go to state 46
+    '/'    shift, and go to state 47
+    '+'    shift, and go to state 48
+    '-'    shift, and go to state 49
+    "**"   shift, and go to state 50
+    '%'    shift, and go to state 51
+    '&'    shift, and go to state 52
+    '|'    shift, and go to state 53
+    '^'    shift, and go to state 54
+    "<<"   shift, and go to state 55
+    ">>"   shift, and go to state 56
+
+    $default  reduce using rule 8 ($@4)
+
+    $@4  go to state 127
+
+
+State 126
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' . '{' $@11 line $@12 '}' endk
+
+    '{'  shift, and go to state 128
+
+
+State 127
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 . ')' '{' $@5 line $@6 '}' endk
+
+    ')'  shift, and go to state 129
+
+
+State 128
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' . $@11 line $@12 '}' endk
+
+    $default  reduce using rule 16 ($@11)
+
+    $@11  go to state 130
+
+
+State 129
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' . '{' $@5 line $@6 '}' endk
+
+    '{'  shift, and go to state 131
+
+
+State 130
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 . line $@12 '}' endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 132
+    assignment  go to state 8
+
+
+State 131
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' . $@5 line $@6 '}' endk
+
+    $default  reduce using rule 9 ($@5)
+
+    $@5  go to state 133
+
+
+State 132
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   18     | FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line . $@12 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    $default  reduce using rule 17 ($@12)
+
+    $@12        go to state 134
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 133
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 . line $@6 '}' endk
+
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 2
+    ELSE        shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    identifier  shift, and go to state 6
+
+    line        go to state 135
+    assignment  go to state 8
+
+
+State 134
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 . '}' endk
+
+    '}'  shift, and go to state 136
+
+
+State 135
+
+    2 line: line . assignment
+    3     | line . identifier
+    4     | line . exp
+   11     | line . FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk
+   11     | line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line . $@6 '}' endk
+   22     | line . WHILE $@13 '(' C $@14 ')' line $@15 endk
+   29     | line . IF '(' C $@19 ')' line $@20 endk
+   33     | line . ELSE line endk
+
+    number      shift, and go to state 16
+    TYPE        shift, and go to state 1
+    IF          shift, and go to state 17
+    ELSE        shift, and go to state 18
+    FOR         shift, and go to state 19
+    WHILE       shift, and go to state 20
+    identifier  shift, and go to state 21
+    '+'         shift, and go to state 22
+    '-'         shift, and go to state 23
+    '('         shift, and go to state 24
+
+    $default  reduce using rule 10 ($@6)
+
+    $@6         go to state 137
+    assignment  go to state 25
+    exp         go to state 26
+    term        go to state 27
+    factor      go to state 28
+
+
+State 136
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' . endk
+
+    endk  shift, and go to state 138
+
+
+State 137
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 . '}' endk
+
+    '}'  shift, and go to state 139
+
+
+State 138
+
+   18 line: FOR '(' assignment $@7 ';' C $@8 ';' $@9 exp $@10 ')' '{' $@11 line $@12 '}' endk .
+
+    $default  reduce using rule 18 (line)
+
+
+State 139
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' . endk
+
+    endk  shift, and go to state 140
+
+
+State 140
+
+   11 line: line FOR '(' assignment $@1 ';' C $@2 ';' $@3 exp $@4 ')' '{' $@5 line $@6 '}' endk .
+
+    $default  reduce using rule 11 (line)

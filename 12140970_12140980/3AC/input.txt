@@ -1,0 +1,7 @@
+a=4
+c=71
+b=c-a
+while (a>b && b<c && c<100 )
+b=a-1
+a=a+b
+end
